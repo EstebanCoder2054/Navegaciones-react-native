@@ -1,20 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler';
 
-export default function App() {
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+// import { StackNavigator } from './src/navigator/StackNavigator';
+// import { MenuLateralBasico } from './src/navigator/MenuLateralBasico';
+import { MenuLateral } from './src/navigator/MenuLateral';
+import { AuthProvider } from './src/context/AuthContext';
+// import { Tabs } from './src/navigator/Tabs';
+
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <NavigationContainer>
+      <AppState>
+        <MenuLateral />
+        {/* <StackNavigator /> */}
+        {/* <MenuLateralBasico /> */}
+        {/* <Tabs /> */}
+      </AppState>
+    </NavigationContainer>
+  )
+};
+
+const AppState = ({ children } : any) => {
+  return (
+    <AuthProvider>
+      { children }
+    </AuthProvider>
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
